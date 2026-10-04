@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Spam Shield AI | Spam Detection System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="bg-blobs">
+      <div class="blob blob1"></div>
+      <div class="blob blob2"></div>
+      <div class="blob blob3"></div>
+    </div>
+
+    <div class="particles" id="particles"></div>
+
+    <nav class="navbar">
+      <div class="logo">🛡️ <span>Spam Shield AI</span></div>
+      <div class="nav-stats">
+        <span class="pill"
+          >Accuracy: {{ (metrics.accuracy * 100) | round(2) }}%</span
+        >
+        <span class="pill">F1: {{ (metrics.f1 * 100) | round(2) }}%</span>
+      </div>
+    </nav>
+
+    <main class="container">
+      <section class="hero">
+        <h1 class="title">
+          <span class="gradient-text">AI-Powered</span> Spam Detection
+        </h1>
+        <p class="subtitle">
+          Paste any SMS / Email text below and let the Naive Bayes + TF-IDF
+          model classify it instantly.
+        </p>
+      </section>
+
+      <section class="card glass">
+        <textarea
+          id="messageInput"
+          placeholder="e.g. Congratulations! You have WON a free iPhone. Click here to claim now..."
+        ></textarea>
+
+        <div class="actions">
+          <button id="checkBtn" class="btn-primary">
+            <span class="btn-text">Analyze Message</span>
+            <span class="spinner hidden"></span>
+          </button>
+          <button id="clearBtn" class="btn-secondary">Clear</button>
+        </div>
+
+        <div class="examples">
+          <span>Try:</span>
+          <button
+            class="chip"
+            data-text="Congratulations! You have WON a $1000 gift card. Click here to claim now http://bit.ly/claim"
+          >
+            Spam example
+          </button>
+          <button
+            class="chip"
+            data-text="Hey, are we still meeting for lunch tomorrow at 6 PM?"
+          >
+            Ham example
+          </button>
+        </div>
+
+        <div id="result" class="result hidden">
+          <div class="result-icon" id="resultIcon"></div>
+          <div class="result-text">
+            <h2 id="resultLabel"></h2>
+            <p id="resultSub"></p>
+          </div>
+
+          <div class="bars">
+            <div class="bar-row">
+              <span>Spam</span>
+              <div class="bar-track">
+                <div class="bar-fill spam-fill" id="spamBar"></div>
+              </div>
+              <span id="spamPct">0%</span>
+            </div>
+            <div class="bar-row">
+              <span>Ham</span>
+              <div class="bar-track">
+                <div class="bar-fill ham-fill" id="hamBar"></div>
+              </div>
+              <span id="hamPct">0%</span>
+            </div>
+          </div>
+        </div>
+
+        <div id="errorBox" class="error hidden"></div>
+      </section>
+
+      <section class="metrics-grid">
+        <div class="metric-card">
+          <h3>{{ (metrics.accuracy * 100) | round(2) }}%</h3>
+          <p>Accuracy</p>
+        </div>
+        <div class="metric-card">
+          <h3>{{ (metrics.precision * 100) | round(2) }}%</h3>
+          <p>Precision</p>
+        </div>
+        <div class="metric-card">
+          <h3>{{ (metrics.recall * 100) | round(2) }}%</h3>
+          <p>Recall</p>
+        </div>
+        <div class="metric-card">
+          <h3>{{ (metrics.f1 * 100) | round(2) }}%</h3>
+          <p>F1 Score</p>
+        </div>
+      </section>
+
+      <footer class="footer">
+        Built with Flask + Scikit-learn (TF-IDF + Multinomial Naive Bayes) ·Made
+        by Saurabh
+      </footer>
+    </main>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+  </body>
+</html>

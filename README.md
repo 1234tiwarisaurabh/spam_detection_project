@@ -1,1 +1,4 @@
 Built a Spam Detection system using Machine Learning and NLP to classify messages as spam or genuine. The model learns patterns from text data and predicts unwanted messages. This project can help automatically filter spam in emails and messaging platforms, making communication safer and more efficient.
+### Spam Detection
+
+Spam Detection is a machine learning project designed to identify whether a message is **spam or genuine**. The system takes the message as input, analyzes its text, and looks for patterns commonly found in spam messages. Using Natural Language Processing (NLP) and machine learning techniques, it learns from previously labeled messages and predicts whether a new message should be treated as spam or not. The main goal of the project is to make message filtering faster and more reliable while reducing unwanted or potentially harmful messages. This approach can be used in email, SMS, and other messaging platforms.
